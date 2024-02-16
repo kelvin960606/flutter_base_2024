@@ -1,6 +1,36 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_base_2024/constants/styles.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+
+import 'components/web_frame.dart';
+import 'routers/index.dart';
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+  }
+}
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  HttpOverrides.global = MyHttpOverrides();
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    systemNavigationBarColor: Colors.transparent, // navigation bar color
+    statusBarColor: Colors.transparent, // status bar color
+    statusBarIconBrightness: Brightness.light,
+  ));
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
   runApp(const MyApp());
 }
 
@@ -28,55 +58,89 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  hideKeyboard(BuildContext context) {
+    final currentFocus = FocusScope.of(context);
+    if (!currentFocus.hasPrimaryFocus) {
+      currentFocus.unfocus();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-              style: TextStyle(
-                fontWeight: FontWeight.w400,
+    return ScreenUtilInit(
+      designSize: const Size(360, 690),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return FlutterWebFrame(
+          builder: (context) {
+            return GetMaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: 'Flutter Demo',
+              // translations: Messages(),
+              // fallbackLocale: const Locale('en', 'us'),
+              // locale: const Locale('zh', 'CN'),
+              theme: ThemeData(
+                fontFamily: FontType.defaultFont,
+                primarySwatch: Colors.blue,
               ),
-            ),
-            Text('$_counter',
-                style: const TextStyle(
-                  fontFamily: 'Lato',
-                  fontWeight: FontWeight.w900,
-                )),
-            const Text(
-              '你点击了按钮几次',
-              style: TextStyle(
-                fontFamily: 'HonorSansCN',
-                fontWeight: FontWeight.w900,
+              initialRoute: Routes.splash,
+              getPages: appRoutes(),
+              builder: EasyLoading.init(
+                builder: (context, child) {
+                  child = Scaffold(
+                    resizeToAvoidBottomInset: false,
+                    body: GestureDetector(
+                      onTap: () => hideKeyboard(context),
+                      child: child,
+                    ),
+                  );
+                  final mediaQueryData = MediaQuery.of(context);
+                  // return MediaQuery(
+                  //     data: mediaQueryData.copyWith(textScaleFactor: 1.0),
+                  //     child: Obx(
+                  //       () => Stack(
+                  //         children: [
+                  //           child ?? Container(),
+                  //         ],
+                  //       ),
+                  //     ));
+                  child = Scaffold(
+                    body: Center(
+                        child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'You have pushed the button this many times:',
+                          style: FontStyle.getFont(
+                            12,
+                            weight: FontWeight.w400,
+                          ),
+                        ),
+                        Text(
+                          '你点击了按钮几次',
+                          style: FontStyle.getFont(
+                            12,
+                            type: FontType.defaultFontCN,
+                            weight: FontWeight.w400,
+                          ),
+                        ),
+                      ],
+                    )),
+                  );
+                  return MediaQuery(
+                    data: mediaQueryData.copyWith(textScaleFactor: 1.0),
+                    child: child,
+                  );
+                },
               ),
-            ),
-            Text('$_counter',
-                style: const TextStyle(
-                  fontFamily: 'Lato',
-                  fontWeight: FontWeight.w900,
-                )),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+            );
+          },
+          maximumSize: const Size(500.0, 812.0),
+          enabled: kIsWeb,
+          backgroundColor: Colors.grey,
+        );
+      },
     );
   }
 }
