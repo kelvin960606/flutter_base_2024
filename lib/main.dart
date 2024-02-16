@@ -69,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(360, 690),
+      designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
@@ -106,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             );
           },
-          maximumSize: const Size(500.0, 812.0),
+          maximumSize: const Size(375, 812),
           enabled: kIsWeb,
           backgroundColor: Colors.grey,
         );
