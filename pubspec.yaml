@@ -83,4 +83,11 @@ flutter:
         - asset: lib/assets/fonts/Poppins/Poppins-BlackItalic.ttf
           weight: 900
           style: italic
-
+    - family: Lato
+      fonts:
+        - asset: lib/assets/fonts/Lato/Lato-Regular.ttf
+          weight: 400
+        - asset: lib/assets/fonts/Lato/Lato-Bold.ttf
+          weight: 700
+        - asset: lib/assets/fonts/Lato/Lato-Black.ttf
+          weight: 900
