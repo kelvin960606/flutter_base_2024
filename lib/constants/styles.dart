@@ -43,13 +43,14 @@ class FontStyle {
       {FontWeight weight = FontWeight.w400, String? type}) {
     switch (type) {
       case FontType.defaultFont:
-        return defaultFontStyle.copyWith(fontSize: size, fontWeight: weight);
+        return defaultFontStyle.copyWith(fontSize: size.sp, fontWeight: weight);
       case FontType.defaultFontCN:
-        return defaultFontStyleCN.copyWith(fontSize: size, fontWeight: weight);
+        return defaultFontStyleCN.copyWith(
+            fontSize: size.sp, fontWeight: weight);
       case FontType.numbers:
-        return numbers.copyWith(fontSize: size, fontWeight: weight);
+        return numbers.copyWith(fontSize: size.sp, fontWeight: weight);
       default:
-        return defaultFontStyle.copyWith(fontSize: size, fontWeight: weight);
+        return defaultFontStyle.copyWith(fontSize: size.sp, fontWeight: weight);
     }
   }
 }

@@ -113,14 +113,14 @@ class _MyHomePageState extends State<MyHomePage> {
                         Text(
                           'You have pushed the button this many times:',
                           style: FontStyle.getFont(
-                            12,
+                            16,
                             weight: FontWeight.w400,
                           ),
                         ),
                         Text(
                           '你点击了按钮几次',
                           style: FontStyle.getFont(
-                            12,
+                            16,
                             type: FontType.defaultFontCN,
                             weight: FontWeight.w400,
                           ),
