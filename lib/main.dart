@@ -57,6 +57,18 @@ class _MyHomePageState extends State<MyHomePage> {
                   fontFamily: 'Lato',
                   fontWeight: FontWeight.w900,
                 )),
+            const Text(
+              '你点击了按钮几次',
+              style: TextStyle(
+                fontFamily: 'HonorSansCN',
+                fontWeight: FontWeight.w900,
+              ),
+            ),
+            Text('$_counter',
+                style: const TextStyle(
+                  fontFamily: 'Lato',
+                  fontWeight: FontWeight.w900,
+                )),
           ],
         ),
       ),

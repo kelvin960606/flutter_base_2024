@@ -91,3 +91,19 @@ flutter:
           weight: 700
         - asset: lib/assets/fonts/Lato/Lato-Black.ttf
           weight: 900
+    - family: HonorSansCN
+      fonts:
+        - asset: lib/assets/fonts/HONORSansCN/HONORSansCN-Thin.ttf
+          weight: 100
+        - asset: lib/assets/fonts/HONORSansCN/HONORSansCN-Light.ttf
+          weight: 300
+        - asset: lib/assets/fonts/HONORSansCN/HONORSansCN-Regular.ttf
+          weight: 400
+        - asset: lib/assets/fonts/HONORSansCN/HONORSansCN-Medium.ttf
+          weight: 500
+        - asset: lib/assets/fonts/HONORSansCN/HONORSansCN-SemiBold.ttf
+          weight: 600
+        - asset: lib/assets/fonts/HONORSansCN/HONORSansCN-Bold.ttf
+          weight: 700
+        - asset: lib/assets/fonts/HONORSansCN/HONORSansCN-Heavy.ttf
+          weight: 900
