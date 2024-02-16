@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class FontType {
   FontType._();
@@ -39,16 +40,26 @@ class FontStyle {
   );
 
   // function get font by size and type
-  static TextStyle getFont(double size,
+  static TextStyle getFont(BuildContext context, int size,
       {FontWeight weight = FontWeight.w400, String? type}) {
-    switch (type) {
-      case FontType.defaultFont:
+    if (type == FontType.numbers) {
+      return numbers.copyWith(fontSize: size.sp, fontWeight: weight);
+    } else if (type == FontType.defaultFontCN) {
+      return defaultFontStyleCN.copyWith(fontSize: size.sp, fontWeight: weight);
+    } else if (type == FontType.defaultFont) {
+      return defaultFontStyle.copyWith(fontSize: size.sp, fontWeight: weight);
+    }
+    // get locale
+    var l = Get.locale;
+    if (l == null) {
+      return defaultFontStyle.copyWith(fontSize: size.sp, fontWeight: weight);
+    }
+    switch (l.languageCode) {
+      case 'en':
         return defaultFontStyle.copyWith(fontSize: size.sp, fontWeight: weight);
-      case FontType.defaultFontCN:
+      case 'zh':
         return defaultFontStyleCN.copyWith(
             fontSize: size.sp, fontWeight: weight);
-      case FontType.numbers:
-        return numbers.copyWith(fontSize: size.sp, fontWeight: weight);
       default:
         return defaultFontStyle.copyWith(fontSize: size.sp, fontWeight: weight);
     }

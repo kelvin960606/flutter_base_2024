@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 
 import 'components/web_frame.dart';
 import 'routers/index.dart';
+import 'translation/index.dart';
 
 class MyHttpOverrides extends HttpOverrides {
   @override
@@ -77,9 +78,9 @@ class _MyHomePageState extends State<MyHomePage> {
             return GetMaterialApp(
               debugShowCheckedModeBanner: false,
               title: 'Flutter Demo',
-              // translations: Messages(),
-              // fallbackLocale: const Locale('en', 'us'),
-              // locale: const Locale('zh', 'CN'),
+              translations: Messages(),
+              fallbackLocale: const Locale('en', 'US'),
+              locale: const Locale('zh', 'CN'),
               theme: ThemeData(
                 fontFamily: FontType.defaultFont,
                 primarySwatch: Colors.blue,
@@ -96,38 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   );
                   final mediaQueryData = MediaQuery.of(context);
-                  // return MediaQuery(
-                  //     data: mediaQueryData.copyWith(textScaleFactor: 1.0),
-                  //     child: Obx(
-                  //       () => Stack(
-                  //         children: [
-                  //           child ?? Container(),
-                  //         ],
-                  //       ),
-                  //     ));
-                  child = Scaffold(
-                    body: Center(
-                        child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          'You have pushed the button this many times:',
-                          style: FontStyle.getFont(
-                            16,
-                            weight: FontWeight.w400,
-                          ),
-                        ),
-                        Text(
-                          '你点击了按钮几次',
-                          style: FontStyle.getFont(
-                            16,
-                            type: FontType.defaultFontCN,
-                            weight: FontWeight.w400,
-                          ),
-                        ),
-                      ],
-                    )),
-                  );
+
                   return MediaQuery(
                     data: mediaQueryData.copyWith(textScaleFactor: 1.0),
                     child: child,
