@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_base_2024/pages/splash.dart';
 import 'package:get/get.dart';
 
 class Routes {
@@ -8,6 +8,6 @@ class Routes {
 appRoutes() => [
       GetPage(
         name: Routes.splash,
-        page: () => Container(),
+        page: () => const SplashScreen(),
       ),
     ];
