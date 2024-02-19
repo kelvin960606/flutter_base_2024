@@ -4,11 +4,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_base_2024/constants/styles.dart';
+import 'package:flutter_base_2024/services/init_service.dart';
+import 'package:flutter_base_2024/utils/pwa_install.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'components/web_frame.dart';
+import 'controllers/app_controller.dart';
 import 'routers/index.dart';
 import 'translation/index.dart';
 
@@ -21,7 +24,7 @@ class MyHttpOverrides extends HttpOverrides {
   }
 }
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   HttpOverrides.global = MyHttpOverrides();
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -32,6 +35,18 @@ void main() {
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
+  await initService();
+  final AppController appController = Get.find();
+  // await appController.getCurrency();
+  PWAInstall().setup(installCallback: () {
+    appController.isPwaShow.value = false;
+  });
+  if (PWAInstall().hasPrompt) {
+    appController.isPwaShow.value = true;
+  } else {
+    appController.isPwaShow.value = false;
+  }
+
   runApp(const MyApp());
 }
 
