@@ -1,3 +1,3 @@
-const appVersion = '3.0.0';
-const appName = 'OKAI';
-const apiUrl = 'https://api.frfx.pro';
+const appVersion = '1.0.0';
+const appName = 'App';
+const apiUrl = 'https://api.example';

@@ -3,6 +3,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 const double defaultPadding = 16.0;
+List<BoxShadow> cardShadow = [
+  BoxShadow(
+    color: Colors.grey.withOpacity(0.3),
+    spreadRadius: 3,
+    blurRadius: 2,
+    offset: const Offset(0, 2),
+  ),
+];
 
 class FontType {
   FontType._();
@@ -14,10 +22,22 @@ class FontType {
 
 class AppColor {
   AppColor._();
+  static const Color backgroundColor = Color(0xFFF3F2F7);
+  static const Color primaryColor = Color(0xFFE51C1C);
+  static const Color secondaryColor = Color(0xFF985852);
+  static const Color fontColor = Color(0xFF3C3C3C);
 
-  static const Color primaryColor = Color(0xFF3A3A3A);
-  static const Color secondaryColor = Color(0xFFE5E5E5);
-  static const Color fontColor = Color(0xFF3A3A3A);
+  static const Color divider = Color(0xFF000029);
+
+  static const List<Color> loadingBarGradients = [
+    Color(0xFFFFE141),
+    Color(0xFFF3BB3C),
+  ];
+
+  static const List<Color> mainHeaderGradients = [
+    Color(0xFFFF1F1F),
+    Color(0xFF5E1B1B),
+  ];
 }
 
 class FontStyle {
@@ -42,7 +62,7 @@ class FontStyle {
   );
 
   // function get font by size and type
-  static TextStyle getFont(BuildContext context, int size,
+  static TextStyle getFont(int size,
       {FontWeight weight = FontWeight.w400, String? type}) {
     if (type == FontType.numbers) {
       return numbers.copyWith(fontSize: size.sp, fontWeight: weight);
