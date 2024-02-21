@@ -1,5 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_base_2024/components/app_main_header.dart';
 import 'package:flutter_base_2024/constants/styles.dart';
 import 'package:flutter_base_2024/controllers/app_controller.dart';
 import 'package:flutter_base_2024/utils/common.dart';
@@ -31,47 +32,25 @@ class LandingScreen extends StatefulWidget {
 class _LandingScreenState extends State<LandingScreen> {
   final AppController appController = Get.find();
 
-  // change screen here
-  List<FooterItem> footerItems = [
-    FooterItem(
-      components: Container(),
-      title: '广场',
-      route: '/home',
-      icon: 'lib/assets/images/home_d.png',
-      activeIcon: 'lib/assets/images/home.png',
-    ),
-    FooterItem(
-      components: Container(),
-      title: '游戏',
-      route: '/game',
-      icon: 'lib/assets/images/game_d.png',
-      activeIcon: 'lib/assets/images/game.png',
-    ),
-    FooterItem(
-      components: Container(),
-      title: '客服',
-      route: '/chat',
-      icon: 'lib/assets/images/cs_d.png',
-      activeIcon: 'lib/assets/images/cs.png',
-    ),
-    FooterItem(
-      components: Container(),
-      title: '优惠',
-      route: '/promotion',
-      icon: 'lib/assets/images/promo_d.png',
-      activeIcon: 'lib/assets/images/promo.png',
-    ),
-    FooterItem(
-      components: Container(),
-      title: '我的',
-      route: '/profile',
-      icon: 'lib/assets/images/profile_d.png',
-      activeIcon: 'lib/assets/images/profile.png',
-    ),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    // change screen here
+    List<FooterItem> footerItems = [
+      FooterItem(
+        components: _buildDefaultScreen('Home'),
+        title: 'Home',
+        route: '/home',
+        icon: 'lib/assets/images/home_d.png',
+        activeIcon: 'lib/assets/images/home.png',
+      ),
+      FooterItem(
+        components: _buildDefaultScreen('Profile'),
+        title: 'Profile',
+        route: '/profile',
+        icon: 'lib/assets/images/profile_d.png',
+        activeIcon: 'lib/assets/images/profile.png',
+      ),
+    ];
     return Scaffold(
       body: SizedBox(
         width: double.infinity,
@@ -80,6 +59,7 @@ class _LandingScreenState extends State<LandingScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             // fixed header here
+            const AppMainHeader(height: 150),
             // screen
             Expanded(
               child: Obx(
@@ -148,6 +128,19 @@ class _LandingScreenState extends State<LandingScreen> {
                     : AppColor.fontColor.withOpacity(0.3),
               )),
         ],
+      ),
+    );
+  }
+
+  Widget _buildDefaultScreen(String title) {
+    return Scaffold(
+      body: Center(
+        child: Text(
+          title,
+          style: FontStyle.getFont(16).copyWith(
+            color: AppColor.fontColor,
+          ),
+        ),
       ),
     );
   }
